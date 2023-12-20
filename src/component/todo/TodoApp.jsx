@@ -1,6 +1,7 @@
 import { BrowserRouter, Route, Routes, useNavigate, useParams, Link } from 'react-router-dom'
 import './TodoApp.css'
 import React, { useState } from "react"
+import axios from 'axios'
 
 export default function TodoApp(){
     return (
@@ -101,7 +102,27 @@ function WelcomeComponent(){
 
     const {username} = useParams();
 
+    const [message,setMessage] = useState(null);
+
     console.log(username)
+
+    function callHelloWolrdApi(){
+        console.log("called");
+        axios.get('http://localhost:8080/hello-world-bean')
+        .then( (response) => successfulResponse(response))
+        .catch( (error) => errorResponse(error))
+        .finally( () => console.log('cleanup'))
+    }
+
+    function successfulResponse(response){
+        console.log(response);
+        setMessage(response.data.output);
+    }
+
+    function errorResponse(error){
+        console.log(error);
+    }
+    
     
         return (
             <div className="WelcomeComponent">
@@ -110,6 +131,10 @@ function WelcomeComponent(){
                     {/* Your todos. <a href='/listTodo'>Click here to know more</a> */}
                     Your todos. <Link to="/listTodo">Click here to know more</Link>  
                     {/* 'Link' is used in place of 'a' to implement single page development rather full page load */}
+                    <div>
+                        <button className="btn btn-success m-5" onClick={callHelloWolrdApi}>Click here to call Hello world</button>
+                    </div>
+                   <div className='text-info'>{message}</div>
                 </div>
             </div>
         )

@@ -1,7 +1,7 @@
 import { BrowserRouter, Route, Routes, useNavigate, useParams, Link } from 'react-router-dom'
 import './TodoApp.css'
 import React, { useState } from "react"
-import { retrieveHelloWorldBean } from './HelloworldApi'
+import { retrieveHelloWorldBean, retrieveHelloWorldPathVriable } from './HelloworldApi'
 
 export default function TodoApp(){
     return (
@@ -108,7 +108,8 @@ function WelcomeComponent(){
 
     function callHelloWolrdApi(){
         console.log("called");
-        retrieveHelloWorldBean()
+        // retrieveHelloWorldBean()
+        retrieveHelloWorldPathVriable(username)
         .then( (response) => successfulResponse(response))
         .catch( (error) => errorResponse(error))
         .finally( () => console.log('cleanup'))

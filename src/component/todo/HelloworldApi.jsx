@@ -4,3 +4,5 @@ import axios from "axios"
 // }
 
 export const retrieveHelloWorldBean = () => axios.get('http://localhost:8080/hello-world-bean')
+
+export const retrieveHelloWorldPathVriable = (username) => axios.get(`http://localhost:8080/hello-world/pathVariable/${username}`)

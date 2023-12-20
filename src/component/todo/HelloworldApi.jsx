@@ -3,6 +3,12 @@ import axios from "axios"
 //     return axios.get('http://localhost:8080/hello-world-bean')
 // }
 
-export const retrieveHelloWorldBean = () => axios.get('http://localhost:8080/hello-world-bean')
+const apiClient = axios.create(
+    {
+        baseURL : "http://localhost:8080"
+    }
+);
 
-export const retrieveHelloWorldPathVriable = (username) => axios.get(`http://localhost:8080/hello-world/pathVariable/${username}`)
+export const retrieveHelloWorldBean = () => apiClient.get('/hello-world-bean')
+
+export const retrieveHelloWorldPathVriable = (username) => apiClient.get(`/hello-world/pathVariable/${username}`)
